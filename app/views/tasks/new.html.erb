@@ -1,0 +1,37 @@
+<% if @task.errors.any? %>
+    <div class="btn btn-danger>
+        <ul>
+            <% @task.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+        olla
+    </div>
+<% end %>
+<div class="card">
+  <div class="card-header">
+    New task page
+  </div>
+  <div class="card-body">
+        <div class="form-group">
+            <%= form_for @task, html: {class: 'form-horizontal'} do |f| %>
+                <%= f.label :title,"The title" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.text_field :title, class: "form-control " %>
+                </div>
+                <%= f.label :content,"Contents" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.text_field :content, class: "form-control " %>
+                </div>
+                </br>
+                </div>
+                    <button type="submit" class="btn btn-primary" id="create-task">Create Task</button></br>
+                    <a class="btn btn-link " href="<%= root_path %>" id="return">Back</a>
+                </div>
+
+            <% end %>
+        
+        </div>
+    </div>
+   
+</div>
