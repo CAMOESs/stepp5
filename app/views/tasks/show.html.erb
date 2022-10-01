@@ -1,0 +1,44 @@
+</br></br>
+
+<div class="card ">
+  <div class="card-header">
+    Show Task Page
+  </div>
+  <div class="card-body">
+  <table class="table">
+  <tbody>
+    <tr>
+      <th scope="col"><%= Task.human_attribute_name(:title) %> : </th>
+      <td scope="col"><%= @task.title %></td>
+      <th></th>
+    </tr>
+  
+    <tr>
+      <th><%= Task.human_attribute_name(:content) %> : </th>
+      <td><%= @task.content %></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <th><%= Task.human_attribute_name(:created_at) %> : </th>
+      <td><%= @task.created_at %></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td colspan="2" class="col-6"><a href="<%= edit_task_path(@task.id) %>" class="btn btn-success" id="edit-task">Edit</a>
+      <a class="btn btn-link " href="<%= root_path %>" id="return">Back</a>
+      
+    </tr>
+   
+  </tbody>
+  
+</table>
+  
+  </div>
+    
+    
+   
+</div>
+
+
