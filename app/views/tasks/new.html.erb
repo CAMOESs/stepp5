@@ -6,8 +6,10 @@
     <h2><%= pluralize(@task.errors.count, "error") %> prohibited this <%= @task.title %> from being saved:</h2>
 
         <ul>
-            <% @task.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
+            <% if @task.errors.full_messages.length == 1 %>
+                <li><%= @task.errors.full_messages %></li>
+            <% else %>
+                <%= @task.errors.full_messages.join(' and ') %>
             <% end %>
         </ul>
     </div>

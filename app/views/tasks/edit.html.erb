@@ -1,16 +1,5 @@
 </br></br>
 
-<div class="card ">
-<% if @task.errors.any? %>
-    <div class="btn btn-danger"> 
-        <ul>
-            <% @task.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-        </ul>
-    </div>
-<% end %>
-
   <div class="card-header">
     Edit task page
   </div>
