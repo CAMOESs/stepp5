@@ -2,12 +2,15 @@
 
 <div class="card ">
 <% if @task.errors.any? %>
-    <div class="btn btn-danger"> 
+    <div class="btn btn-danger" id="error_explanation"> 
+    <h2><%= pluralize(@task.errors.count, "error") %> prohibited this <%= @task.title %> from being saved:</h2>
+
         <ul>
             <% @task.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
             <% end %>
         </ul>
+    </div>
     </div>
 <% end %>
 
