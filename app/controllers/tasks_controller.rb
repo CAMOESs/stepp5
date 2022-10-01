@@ -28,7 +28,8 @@ class TasksController < ApplicationController
   
     def update
       if @task.update(task_params)
-        redirect_to task_path, success:"Task was successfully updated."
+        flash[:success]="Task was successfully updated."
+        redirect_to task_path
       else
         render :edit
       end
@@ -36,7 +37,8 @@ class TasksController < ApplicationController
   
     def destroy
       @task.destroy
-      redirect_to tasks_path, danger:"Task was successfully destroyed."
+      flash[:danger]="ask was successfully destroyed."
+      redirect_to tasks_path
     end
   
     private
