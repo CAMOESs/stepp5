@@ -7,7 +7,7 @@
 
         <ul>
             <% if @task.errors.full_messages.length == 1 %>
-                <li><%= @task.errors.full_messages %></li>
+                <li><%= @task.errors.full_messages[0] %></li>
             <% else %>
                 <%= @task.errors.full_messages.join(' and ') %>
             <% end %>
@@ -17,7 +17,7 @@
 <% end %>
 
   <div class="card-header">
-    New task page
+  <h1>New Task Page</h1>
   </div>
   <div class="card-body">
         <div class="form-group">
