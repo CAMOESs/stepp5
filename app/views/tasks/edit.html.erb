@@ -8,7 +8,7 @@
             <% if @task.errors.full_messages.length == 1 %>
                 <li><%= @task.errors.full_messages[0] %></li>
             <% else %>
-                <%= @task.errors.full_messages.join(' and ') %>
+            <li><%= @task.errors.full_messages.join(' and ') %> </li>
             <% end %>
         </ul>
     </div>
@@ -32,7 +32,7 @@
                 </br>
                 <div>
                     <button type="submit" class="btn btn-primary"  id="update-user">Update Task</button></br>
-                    <a class="btn btn-link " href="<%= root_path %>" id="return">Back</a>
+                    <a class="btn btn-link " href="<%= root_path %>" id="back">Back</a>
                 </div>
             <% end %>
         
