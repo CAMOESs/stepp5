@@ -20,9 +20,9 @@
         <td><%= task.title %></td>
         <td><%= task.content %></td>
         <td><%= task.created_at %></td>
-        <td> <a class="btn btn-primary " href="<%= task_path(task.id) %>" id="show-task">Show</a></td>
-        <td> <a class="btn btn-success " href="<%= edit_task_path(task.id) %>" id="edit-task">Edit</a></td>
-        <td> <a class="btn btn-danger " href="<%= task_path(task.id) %>" data-confirm="Are you sure?" data-method="delete" id="destroy-task">Destroy</a></td>
+        <td> <a class="btn btn-primary " href="<%= task_path(task.id) %>" id="show">Show</a></td>
+        <td> <a class="btn btn-success " href="<%= edit_task_path(task.id) %>" id="edit">Edit</a></td>
+        <td> <a class="btn btn-danger " href="<%= task_path(task.id) %>" data-confirm="Are you sure?" data-method="delete" id="destroy_task">Destroy</a></td>
       </tr>
     <% end %>
   </tbody>
