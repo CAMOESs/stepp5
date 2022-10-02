@@ -1,4 +1,9 @@
 </br></br>
+<% if flash[:success] %>
+      <div class="alert alert-success ">
+        <%= flash[:success] %>
+      </div>
+  <%end%>
 
 <div class="card ">
   <div class="card-header">
