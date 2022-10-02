@@ -1,0 +1,45 @@
+</br></br>
+<div class="card ">
+
+<% if @task.errors.any? %>
+        <div class="btn btn-danger" id="error_explanation"> 
+            <h2><%= pluralize(@task.errors.count, "error") %> prohibited this <%= @task.title %> from being saved:</h2>
+
+            <ul>
+                <% if @task.errors.full_messages.length == 1 %>
+                    <li><%= @task.errors.full_messages[0] %></li>
+                <% else %>
+                <li><%= @task.errors.full_messages.join(' and ') %> </li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+  <div class="card-header">
+  
+    <h1>Edit Task Page</h1>
+  </div>
+  <div class="card-body">
+        <div class="form-group">
+            <%= form_for @task do |f| %>
+                <%= f.label :title,"Title" , class: "control-label"%>
+                <div>
+                    <%= f.text_field :title, class: "form-control " %>
+                </div>
+                <%= f.label :content,"Content" , class: " control-label"%>
+                <div >
+                    <%= f.text_field :content, class: "form-control " %>
+                </div>
+                </br>
+                <div>
+                    <button type="submit" class="btn btn-primary"  id="update-task">Update Task</button></br>
+                    <a class="btn btn-link " href="<%= tasks_path %>" id="back">Back</a>
+                </div>
+            <% end %>
+        
+        </div>
+    </div>
+    
+    
+   
+</div>
