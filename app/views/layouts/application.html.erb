@@ -26,6 +26,9 @@
           </div>
       </div>
     </nav>
+
+    <div class="container-md">
+      </br></br></br>
     <% if flash[:success] %>
       <div class="alert alert-success ">
         <%= flash[:success] %>
@@ -37,12 +40,6 @@
         <%= flash[:danger] %>
       </div>
     <%end%>
-
-    <div class="container-md">
-      </br>
-      </br>
-      </br>
-    
       <%= yield %>
     </div>
 
