@@ -21,9 +21,11 @@ class TasksController < ApplicationController
     end
   
     def show
+      flash[:success]="Task was successfully updated."
     end
   
     def edit
+      flash[:success]="Task was successfully updated."
     end
   
     def update
