@@ -38,7 +38,7 @@ RSpec.describe 'タスク管理機能', type: :system do
                 # タスク一覧画面に遷移
                 visit task_path(@task.id)
                 # visit（遷移）したpage（この場合、タスク一覧画面）に"書類作成"という文字列が、have_content（含まれていること）をexpect（確認・期待）する
-                expect(page).to have_content 'contentyopo'
+                expect(page).to have_content 'content'
                 # expectの結果が「真」であれば成功、「偽」であれば失敗としてテスト結果が出力される
             end
         end
