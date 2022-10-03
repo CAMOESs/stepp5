@@ -44,4 +44,34 @@ RSpec.describe 'タスク管理機能', type: :system do
         end
     end
 
+    describe 'list display' do
+        context 'fonction when transitioning to' do
+            it 'the list screen a list of registered tasks is displayed' do
+                @task = FactoryBot.create(:task, content: 'content')
+                visit new_task_path
+                expect(page).to have_content 'New Task Page'
+            end
+        end
+    end
+
+    describe 'registration function' do
+        context 'when you register a task' do
+            it 'the registered tasks is displayed' do
+                @task = FactoryBot.create(:task, content: 'content')
+                visit tasks_path
+                expect(page).to have_content @task.title
+            end
+        end
+    end
+
+    describe 'detailed display' do
+        context 'fonction when transitioning to any task details screen' do
+            it 'the contents of the task are displayed' do
+                @task = FactoryBot.create(:task, content: 'content')
+                visit task_path(@task.id)
+                expect(page).to have_content @task.content
+            end
+        end
+    end
+
 end
