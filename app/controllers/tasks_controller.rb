@@ -51,4 +51,7 @@ class TasksController < ApplicationController
         params.require(:task).permit(:title, :content)
       end
 
+      def relative_time_in_time_zone(time, zone)
+        DateTime.parse(time.strftime("%d %b %Y %H:%M:%S +0900 #{time.in_time_zone(zone).formatted_offset}"))
+     end
 end
