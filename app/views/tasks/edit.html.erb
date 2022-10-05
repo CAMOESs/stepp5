@@ -7,8 +7,6 @@
             <ul>
                 <% if @task.errors.full_messages.length == 1 %>
                     <li><%= @task.errors.full_messages[0] %> </li>
-                <% else %>
-                    <li><%= @task.errors.full_messages.join(', ') %> </li>
                 <% end %>
             </ul>
         </div>
