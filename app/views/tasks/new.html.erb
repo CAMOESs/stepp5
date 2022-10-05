@@ -12,7 +12,7 @@
                     <li><%= t("message.validate.content") %></li>
                 <% end %>
                 <% else %>
-                <li><%= @task.errors.full_messages.join(' and ') %> </li>
+                <li><%= @task.errors.full_messages.join(', ') %> </li>
                 <% end %>
             </ul>
         </div>
