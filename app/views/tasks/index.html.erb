@@ -20,7 +20,7 @@
       <tr>
         <td><%= task.title %></td>
         <td><%= task.content %></td>
-        <td class = "XPath"><%= task.created_at.strftime("%d %b %Y %H:%M:%S ")%> +0900</td>
+        <td class = "XPath"><%= task.created_at.strftime("%Y-%m-%d %H:%M:%S ")%> +0900</td>
         <td> <a class="btn btn-primary show-task"  href="<%= task_path(task.id) %>"><%= t("listTask.el.show") %></a></td>
         <td> <a class="btn btn-success edit-task"  href="<%= edit_task_path(task.id) %>"><%= t("listTask.el.edit")%></a></td>
         <td> <a class="btn btn-danger destroy-task"  href="<%= task_path(task.id) %>" data-confirm= <%= t("listTask.el.confirm") %> data-method="delete"><%= t("listTask.el.destroy")%></a></td>
