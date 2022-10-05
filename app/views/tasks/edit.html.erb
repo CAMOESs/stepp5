@@ -6,7 +6,11 @@
 
             <ul>
                 <% if @task.errors.full_messages.length == 1 %>
-                    <li><%= @task.errors.full_messages[0] %></li>
+                    <% if @task.errors.full_messages.include?('タイトルを入力してください') == true %>
+                        <li><%= t("message.validate.title") %></li>
+                    <% else %>
+                        <li><%= t("message.validate.content") %></li>
+                    <% end %>
                 <% else %>
                 <li><%= @task.errors.full_messages.join(' and ') %> </li>
                 <% end %>
