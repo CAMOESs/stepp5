@@ -5,9 +5,7 @@
         <div class="btn btn-danger" id="error_explanation"> 
 
             <ul>
-                <% if @task.errors.full_messages.length == 1 %>
                     <li><%= @task.errors.full_messages[0] %> </li>
-                <% end %>
             </ul>
         </div>
     <% end %>
