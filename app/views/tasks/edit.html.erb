@@ -3,7 +3,6 @@
 
 <% if @task.errors.any? %>
         <div class="btn btn-danger" id="error_explanation"> 
-            <h2><%= pluralize(@task.errors.count, "error") %> prohibited this <%= @task.title %> from being saved:</h2>
 
             <ul>
                 <% if @task.errors.full_messages.length == 1 %>
@@ -17,23 +16,23 @@
 
   <div class="card-header">
   
-    <h1>Edit Task Page</h1>
+    <h1><%= t("editTask.el.titlePage") %></h1>
   </div>
   <div class="card-body">
         <div class="form-group">
             <%= form_for @task do |f| %>
-                <%= f.label :title,"Title" , class: "control-label"%>
+                <%= f.label :title, class: "control-label"%>
                 <div>
                     <%= f.text_field :title, class: "form-control " %>
                 </div>
-                <%= f.label :content,"Content" , class: " control-label"%>
+                <%= f.label :content, class: " control-label"%>
                 <div >
                     <%= f.text_field :content, class: "form-control " %>
                 </div>
                 </br>
                 <div>
-                    <button type="submit" class="btn btn-primary"  id="update-task">Update Task</button></br>
-                    <a class="btn btn-link " href="<%= tasks_path %>" id="back">Back</a>
+                    <button type="submit" class="btn btn-primary"  id="update-task"><%= t("editTask.el.update") %></button></br>
+                    <a class="btn btn-link " href="<%= tasks_path %>" id="back"><%= t("activerecord.attributes.task.back") %></a>
                 </div>
             <% end %>
         

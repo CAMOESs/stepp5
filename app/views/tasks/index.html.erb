@@ -2,15 +2,15 @@
 
 <div class="card ">
   <div class="card-header">
-    <h1>Tasks Index Page</h1>
+    <h1><%= t("listTask.el.titlePage") %></h1>
   </div>
   <div class="card-body">
   <table class="table">
   <thead>
     <tr>
-      <th scope="col"><%= Task.human_attribute_name(:title) %></th>
-      <th scope="col"><%= Task.human_attribute_name(:content) %></th>
-      <th scope="col"> Created_at </th>
+      <th scope="col"><%= t("listTask.el.title") %></th>
+      <th scope="col"><%= t("listTask.el.Content") %></th>
+      <th scope="col"> <%= t("listTask.el.Created_at") %> </th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,14 +19,15 @@
       <tr>
         <td><%= task.title %></td>
         <td><%= task.content %></td>
-        <td><%= task.created_at %></td>
-        <td> <a class="btn btn-primary show-task"  href="<%= task_path(task.id) %>">Show</a></td>
-        <td> <a class="btn btn-success edit-task"  href="<%= edit_task_path(task.id) %>">Edit</a></td>
-        <td> <a class="btn btn-danger destroy-task"  href="<%= task_path(task.id) %>" data-confirm="Are you sure?" data-method="delete">Destroy</a></td>
-      </tr>
+        <td class = "XPath"><%= l(task.created_at, format: :long) %></td>
+        <td> <a class="btn btn-primary show-task"  href="<%= task_path(task.id) %>"><%= t("listTask.el.show") %></a></td>
+        <td> <a class="btn btn-success edit-task"  href="<%= edit_task_path(task.id) %>"><%= t("listTask.el.edit")%></a></td>
+        <td> <a class="btn btn-danger destroy-task"  href="<%= task_path(task.id) %>" data-confirm= <%= t("listTask.el.confirm") %> data-method="delete"><%= t("listTask.el.destroy")%></a></td>
+        </tr>
+      
     <% end %>
   </tbody>
 </table>
     </div>
-    
+    <%= paginate @tasks %>
 </div>

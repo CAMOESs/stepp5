@@ -2,7 +2,7 @@
 <%content_for(:title,"Show Task Page") %>
 <div class="card ">
   <div class="card-header">
-  <h1>Show Task Page<h1>
+  <h1><%= t("showTask.el.titlePage") %><h1>
   </div>
   <div class="card-body">
   <table class="table">
@@ -20,14 +20,14 @@
     </tr>
 
     <tr>
-      <th> Created_at : </th>
+      <th> <%= t("activerecord.attributes.task.created_at") %> : </th>
       <td><%= @task.created_at %></td>
       <td></td>
     </tr>
 
     <tr>
-      <td colspan="2" class="col-6"><a href="<%= edit_task_path(@task.id) %>" class="btn btn-success" id="edit-task">Edit</a>
-      <a class="btn btn-link " href="<%= tasks_path %>" id="back">Back</a></td>
+      <td colspan="2" class="col-6"><a href="<%= edit_task_path(@task.id) %>" class="btn btn-success" id="edit-task"><%= t("listTask.el.edit") %></a>
+      <a class="btn btn-link " href="<%= tasks_path %>" id="back"><%= t("activerecord.attributes.task.back") %></a></td>
       
     </tr>
    

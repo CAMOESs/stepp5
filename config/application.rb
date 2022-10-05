@@ -10,8 +10,7 @@ module CdpWebManyoTask
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
-    # config/application.rb
-    #config.assets.initialize_on_precompile = false
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
@@ -28,6 +27,9 @@ module CdpWebManyoTask
         controller_specs: false,
         request_specs: false
     end
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/activerecord/*.{rb,yml}')]
+    config.i18n.default_locale = :ja
+    #config.i18n.default_locale = :fr
 
   end
 end
