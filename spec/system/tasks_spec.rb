@@ -49,7 +49,7 @@ RSpec.describe 'タスク管理機能', type: :system do
             it 'the list screen a list of registered tasks is displayed' do
                 @task = FactoryBot.create(:task, content: 'content')
                 visit new_task_path
-                expect(page).to have_content 'New Task Page'
+                expect(page).not_to have_content 'New Task Page'
             end
         end
     end
@@ -73,5 +73,75 @@ RSpec.describe 'タスク管理機能', type: :system do
             end
         end
     end
+
+    describe 'list display function' do
+        context 'when transitioning to the context list screen' do
+            it 'created task is displayed in descending order of creation date' do
+                @task = FactoryBot.create(:task, content: 'content',created_at: '2022/10/04 11:26')
+                @task1 = FactoryBot.create(:task, content: 'content',created_at: '2022/08/03 11:26')
+                @task2 = FactoryBot.create(:task, content: 'content',created_at: '2022/09/02 16:26')
+                @task = FactoryBot.create(:task, content: 'content',created_at: '2022/05/01 15:26')
+
+                visit tasks_path
+                #task_list = all('body tr')
+                len = page.all('.XPath').length
+                tab = []
+                task_list = page.all('.XPath')
+                len.times do |n|
+                    tab << task_list[n].text
+                end
+                tab1 = tab.sort {|a, b| b <=> a}
+                expect(tab).to eq(tab1)
+            end
+        end
+
+        context 'if you create a new task do' do
+            it 'new tasks appear on  top' do
+                @task = FactoryBot.create(:task, content: 'content',created_at: Date.current)
+                sleep 1
+                @task1 = FactoryBot.create(:task, content: 'content',created_at: Date.current)
+                sleep 1
+                @task2 = FactoryBot.create(:task, content: 'content',created_at: Date.current)
+                sleep 1
+                @task3 = FactoryBot.create(:task, content: 'content',created_at:  Date.current)
+                visit tasks_path
+                #task_list = all('body tr')
+                len = page.all('.XPath').length
+                tab = []
+                task_list = page.all('.XPath')
+                len.times do |n|
+                    tab << task_list[n].text
+                end
+                tab1 = tab.sort {|a, b| b <=> a}
+                expect(@task3.created_at).to eq(tab1[1])
+            end
+        end
+    end
+
+    describe 'List display function' do
+        # let!を使ってテストデータを変数として定義することで、複数のテストでテストデータを共有できる
+        let!(:task) { FactoryBot.create(:task, title: 'task_title') }
+        # 「When transitioning to the list screen」や「タスクが作成日時の降順に並んでいる場合」など、contextが実行されるタイミングで、before内のコードが実行される
+        before do
+          visit tasks_path
+        end
+   
+       context 'When transitioning to the list screen' do
+         it 'The created task list is displayed' do
+           # task = FactoryBot.create(:task, title: 'task')
+           # visit tasks_path
+           # omit
+           expect(page).to have_content task.title
+         end
+       end
+   
+       context '新たにタスクを作成した場合' do
+         it '新しいタスクが一番上に表示される' do
+           # task = FactoryBot.create(:task, title: 'task')
+           # visit tasks_path
+           # omit
+         end
+       end
+     end
 
 end
