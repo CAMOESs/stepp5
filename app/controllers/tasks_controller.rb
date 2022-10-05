@@ -52,6 +52,7 @@ class TasksController < ApplicationController
       end
 
       def relative_time_in_time_zone(time, zone)
+        #Time.new(@f[0].to_i, @f[1].to_i,@f[2].to_i,@f[3].to_i,@f[4].to_i,@f[5].to_i, "+09:00")
         DateTime.parse(time.strftime("%d %b %Y %H:%M:%S +0900 #{time.in_time_zone(zone).formatted_offset}"))
      end
 end
