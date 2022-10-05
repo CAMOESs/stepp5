@@ -7,7 +7,7 @@
             <ul>
                 <% if @task.errors.full_messages.length == 1 %>
                     <% if @task.errors.full_messages.include?('タイトルを入力してください') == true %>
-                        <li><%= @task.errors.full_messages[0] %></li>
+                        <li>タイトルを入力してください %></li>
                     <% else %>
                         <li><%= @task.errors.full_messages[0] %></li>
                     <% end %>
