@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
-
+    #require 'date_time_attribute'
     before_action :set_task, only: %i[ show edit update destroy ]
   
     def index
-      @tasks = Task.all
+      @tasks = Task.all.order(created_at: :desc).page params[:page]
     end
   
     def new
@@ -13,7 +13,7 @@ class TasksController < ApplicationController
     def create
       @task = Task.new(task_params)
       if @task.save
-        flash[:success]="Task was successfully created."
+        flash[:success]= t("message.flash.success.type1") 
         redirect_to tasks_path
       else
         render :new
@@ -28,7 +28,7 @@ class TasksController < ApplicationController
   
     def update
       if @task.update(task_params)
-        flash[:success]="Task was successfully updated."
+        flash[:success]=t("message.flash.success.type2")
         redirect_to tasks_path
       else
         render :edit
@@ -37,7 +37,7 @@ class TasksController < ApplicationController
   
     def destroy
       @task.destroy
-      flash[:danger]="Task was successfully destroyed."
+      flash[:danger]=t("message.flash.danger")
       redirect_to tasks_path
     end
   
@@ -51,4 +51,10 @@ class TasksController < ApplicationController
         params.require(:task).permit(:title, :content)
       end
 
+      def relative_time_in_time_zone(time, zone)
+        p.created_at.in_time_zone('Asia/Tokyo')
+        #Time.new(@f[0].to_i, @f[1].to_i,@f[2].to_i,@f[3].to_i,@f[4].to_i,@f[5].to_i, "+09:00")
+        DateTime.parse(time.strftime("%d %b %Y %H:%M:%S +0900 #{time.in_time_zone(zone).formatted_offset}"))
+     end
+    
 end

@@ -14,13 +14,13 @@
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark ">
       <div class="container-md">
-          <a class="navbar-brand" href="<%= tasks_path %>" id="tasks-index">Tasks Index </a>
+          <a class="navbar-brand" href="<%= tasks_path %>" id="tasks-index"><%= t("global.menu.home") %></a>
          
           <div class="collapse navbar-collapse" id="navbarCollapse">
             
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="<%= new_task_path %>" id="new-task"> New Task <span class="sr-only"></span></a>
+                <a class="nav-link" href="<%= new_task_path %>" id="new-task"><%= t("global.menu.link") %><span class="sr-only"></span></a>
               </li>
             </ul>
           </div>
