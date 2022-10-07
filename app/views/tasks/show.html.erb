@@ -26,6 +26,24 @@
     </tr>
 
     <tr>
+      <th> 終了期限 </th>
+      <td><%= @task.deadline_on %></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <th> 優先度 </th>
+      <td><%= @task.priority %></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <th> ステータス </th>
+      <td><%= @task.status%></td>
+      <td></td>
+    </tr>
+
+    <tr>
       <td colspan="2" class="col-6"><a href="<%= edit_task_path(@task.id) %>" class="btn btn-success" id="edit-task"><%= t("listTask.el.edit") %></a>
       <a class="btn btn-link " href="<%= tasks_path %>" id="back"><%= t("activerecord.attributes.task.back") %></a></td>
       

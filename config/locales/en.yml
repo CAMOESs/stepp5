@@ -31,3 +31,9 @@
 
 en:
   hello: "Hello world"
+date:
+  order:
+    - :year
+    - :day
+    - :month
+      
