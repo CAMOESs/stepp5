@@ -3,7 +3,15 @@ class TasksController < ApplicationController
     before_action :set_task, only: %i[ show edit update destroy ]
   
     def index
-      @tasks = Task.all.order(created_at: :desc).page params[:page]
+      if params[:search]
+        @tasks = Task.all
+      else
+        if params[:sort_deadline_on]
+            @tasks = Task.all.order(deadline_on: :asc).page params[:page]
+        else
+          @tasks = Task.all.order(created_at: :desc).page params[:page]
+        end
+      end
     end
   
     def new
@@ -40,6 +48,10 @@ class TasksController < ApplicationController
       flash[:danger]=t("message.flash.danger")
       redirect_to tasks_path
     end
+
+    def search
+      redirect_to tasks_path
+    end
   
     private
   
@@ -48,7 +60,7 @@ class TasksController < ApplicationController
       end
   
       def task_params
-        params.require(:task).permit(:title, :content)
+        params.require(:task).permit(:title, :content, :deadline_on,:priority, :status)
       end
 
       def relative_time_in_time_zone(time, zone)

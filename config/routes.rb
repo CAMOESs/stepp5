@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 
   delete  "/tasks/:id", to:"tasks#destroy", as: :destroy
   resources :tasks
+  post 'search',to:"tasks#search", as: :search
 end
