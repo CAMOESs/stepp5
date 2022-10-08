@@ -8,7 +8,7 @@ class TasksController < ApplicationController
       elsif params[:sort_priority] && (conf == 1)
           @tasks = Task.all.order(created_at: :desc).page params[:page]
       elsif params[:sort_priority] && (conf != 1)
-          @tasks = Task.all.order(priority: :asc).page params[:page]
+          @tasks = Task.all.order(priority: :desc).page params[:page]
       else
         @tasks = Task.all.order(created_at: :desc).page params[:page]
       end
@@ -77,8 +77,7 @@ class TasksController < ApplicationController
       i = 0
       @tasks = Task.all
       @tasks.each do |task|
-        prio = task.priority
-        if prio != nil && task.priority? == false
+        if task.priority? == false
           break i = 1 
         end
       end
