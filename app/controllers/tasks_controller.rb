@@ -10,14 +10,18 @@ class TasksController < ApplicationController
       elsif params[:sort_priority] && (conf != 1)
           @tasks = Task.all.order(priority: :asc).page params[:page]
       else
-        @tasks = Task.where("status = 1").page params[:page]
-
-        if params[:search].present?
+        
+        if params.present?
+          @tasks = Task.where("status = 1").page params[:page]
+          #session[:title] = params[:search][:title]
           #if パラメータにタイトルとステータスの両方があった場合
           #elsif パラメータにタイトルのみがあった場合
           #elsif パラメータにステータスのみがあった場合
           #end
           puts params[:search]
+        else
+          params[:search].present?.inspect
+          @tasks = Task.all.order(created_at: :desc).page params[:page]
         end
       #  @tasks = Task.all.order(created_at: :desc).page params[:page]
       end
@@ -58,14 +62,6 @@ class TasksController < ApplicationController
       redirect_to tasks_path
     end
 
-    def search
-        session[:search] = params[:search]
-        session[:title] = params[:search][:title]
-        session[:status] = params[:search][:status]
-        #Task.where("title = ? AND status = ?", params[:search][:title], params[:search][:status])
-        #redirect_to tasks_path
-    end
-  
   private
   
     def set_task
