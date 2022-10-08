@@ -11,16 +11,15 @@ class TasksController < ApplicationController
           @tasks = Task.all.order(priority: :asc).page params[:page]
       else
         
-        if params.present?
+        if params[:search].present?
           @tasks = Task.where("status = 1").page params[:page]
-          #session[:title] = params[:search][:title]
+          #session[:title] = param[:search][:title]
           #if パラメータにタイトルとステータスの両方があった場合
           #elsif パラメータにタイトルのみがあった場合
           #elsif パラメータにステータスのみがあった場合
           #end
           puts params[:search]
         else
-          params[:search].present?.inspect
           @tasks = Task.all.order(created_at: :desc).page params[:page]
         end
       #  @tasks = Task.all.order(created_at: :desc).page params[:page]
