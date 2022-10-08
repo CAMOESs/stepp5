@@ -3,14 +3,12 @@ class TasksController < ApplicationController
     before_action :set_task, only: %i[ show edit update destroy ]
   
     def index
-      if params[:search]
-        @tasks = Task.all
+      if session[:search].present?
+        @tasks = Task.all.where("status = 3")
+      elsif params[:sort_deadline_on]
+        @tasks = Task.all.order(deadline_on: :asc).page params[:page]
       else
-        if params[:sort_deadline_on]
-            @tasks = Task.all.order(deadline_on: :asc).page params[:page]
-        else
-          @tasks = Task.all.order(created_at: :desc).page params[:page]
-        end
+        @tasks = Task.all.order(created_at: :desc).page params[:page]
       end
     end
   
@@ -50,7 +48,11 @@ class TasksController < ApplicationController
     end
 
     def search
-      redirect_to tasks_path
+        session[:search] = params[:search]
+        session[:title] = params[:search][:title]
+        session[:status] = params[:search][:status]
+        #Task.where("title = ? AND status = ?", params[:search][:title], params[:search][:status])
+        redirect_to tasks_path
     end
   
     private
