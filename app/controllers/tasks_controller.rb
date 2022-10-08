@@ -9,7 +9,7 @@ class TasksController < ApplicationController
         if params[:sort_priority] && (conf == 1)
           @tasks = Task.all.order(created_at: :desc).page params[:page]
         elsif params[:sort_priority] && (conf != 1)
-          @tasks = Task.all.order(priority: :desc).page params[:page]
+          @tasks = Task.all.order(priority: :asc).page params[:page]
         end
       else
         @tasks = Task.all.order(created_at: :desc).page params[:page]
