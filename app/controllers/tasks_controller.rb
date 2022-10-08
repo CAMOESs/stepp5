@@ -3,9 +3,7 @@ class TasksController < ApplicationController
     before_action :set_task, only: %i[ show edit update destroy ]
   
     def index
-      if session[:search].present?
-        @tasks = Task.all.where("status = 3")
-      elsif params[:sort_deadline_on]
+      if params[:sort_deadline_on]
         @tasks = Task.all.order(deadline_on: :asc).page params[:page]
       else
         @tasks = Task.all.order(created_at: :desc).page params[:page]
