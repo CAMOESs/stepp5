@@ -14,11 +14,15 @@ class TasksController < ApplicationController
         n = 0 if session.delete(:search?)
         @tasks = Task.all.order(created_at: :desc).page params[:page]
         @title = session[:title]
-        @tasks = Task.where("title LIKE ? ",@title).page params[:page]
+        #@tasks = Task.where("title LIKE ? ",@title).page params[:page]
         @status = session[:status]
-        if ((@title != nil && @status != nil))
+        @v = @status == '' && @title !=''
+        @b = ""!=nil
+        @a = @title != '' && @status !=nil
+        puts @b
+        if ((@title != nil || @status != nil))
          
-          if @title != '' && @status !=nil
+          if @title != '' && @status !=''
             i=0
             puts i
             if @status == "未着手" && @title != nil
@@ -29,7 +33,7 @@ class TasksController < ApplicationController
               @tasks = Task.where("title LIKE ? AND status = 2",@title).page params[:page]
             end
             
-          elsif (@status == '' && @title != '')
+          elsif (@status == '' && @title.is_a?(String))
             i=1
             puts i
             @tasks = Task.where("title LIKE ? ",@title).page params[:page]
