@@ -6,7 +6,7 @@ class TasksController < ApplicationController
       if params[:sort_deadline_on]
         @tasks = Task.all.order(deadline_on: :asc).page params[:page]
       elsif params[:sort_priority] && (conf != 1)
-          @tasks = Task.all.order(priority: :asc).order(created_at: :desc).page params[:page]
+        @tasks = Task.all.order(priority: :asc).page params[:page]
           
       elsif
         @sess = session[:search]
