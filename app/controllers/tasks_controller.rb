@@ -9,12 +9,10 @@ class TasksController < ApplicationController
        #   @tasks = Task.all.order(created_at: :desc).page params[:page]
       elsif params[:sort_priority] && (conf != 1)
           @tasks = Task.all.order(priority: :asc).page params[:page]
-      else
+      elsif
         @sess = session[:search]
-        n = 0 if session.delete(:search?)
         @tasks = Task.all.order(created_at: :desc).page params[:page]
         @title = session[:title]
-        #@tasks = Task.where("title LIKE ? ",@title).page params[:page]
         @status = session[:status]
         @v = @status == '' && @title !=''
         @b = ""!=nil
@@ -52,7 +50,8 @@ class TasksController < ApplicationController
         
         end
         session.destroy
-      #  @tasks = Task.all.order(created_at: :desc).page params[:page]
+      else
+        @tasks = Task.all.order(created_at: :desc).page params[:page]
       end
     end
   
