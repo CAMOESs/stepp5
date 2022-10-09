@@ -10,18 +10,45 @@ class TasksController < ApplicationController
       elsif params[:sort_priority] && (conf != 1)
           @tasks = Task.all.order(priority: :asc).page params[:page]
       else
-        
-        if params[:search].present?
-          @tasks = Task.where("status = 1").page params[:page]
-          #session[:title] = param[:search][:title]
-          #if パラメータにタイトルとステータスの両方があった場合
-          #elsif パラメータにタイトルのみがあった場合
-          #elsif パラメータにステータスのみがあった場合
-          #end
-          puts params[:search]
+        @sess = session[:search]
+        n = 0 if session.delete(:search?)
+        @tasks = Task.all.page params[:page]
+        @title = session[:title]
+        @status = session[:status]
+        if ((@title != nil && @status != nil) || (@title == nil && @status != nil) || (@title != nil && @status == nil))
+         
+          if @title != nil && @status !=nil
+            i=0
+            puts i
+            if @status == "未着手" 
+              @tasks = Task.where("title LIKE ? AND status = ?",@title,0).page params[:page]
+            elsif @status == "着手中"
+              @tasks = Task.where("title LIKE ? AND status = ?",@title,1).page params[:page]
+            elsif @status == "完了"
+              @tasks = Task.where("title LIKE ? AND status = ?",@title,2).page params[:page]
+            end
+            
+          elsif @status ==nil && @title != nil
+            i=1
+            puts i
+            @tasks = Task.where("title LIKE ? ",@title).page params[:page]
+          elsif @status != nil
+            i=2
+            puts i
+            if @status == "未着手" 
+              @tasks = Task.where("status = ?",0).page params[:page]
+            elsif @status == "着手中"
+              @tasks = Task.where("status = ?",1).page params[:page]
+            elsif @status == "完了"
+              @tasks = Task.where("status = ?",2).page params[:page]
+            end
+          end
+          
         else
           @tasks = Task.all.order(created_at: :desc).page params[:page]
+          
         end
+        session.destroy
       #  @tasks = Task.all.order(created_at: :desc).page params[:page]
       end
     end
@@ -58,6 +85,13 @@ class TasksController < ApplicationController
     def destroy
       @task.destroy
       flash[:danger]=t("message.flash.danger")
+      redirect_to tasks_path
+    end
+    def search
+      session[:search] = params[:search]
+      session[:search?] = 1
+      session[:title] = params[:search][:title]
+      session[:status] = params[:search][:status]
       redirect_to tasks_path
     end
 

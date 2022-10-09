@@ -1,5 +1,6 @@
 </br></br>
-
+<%= debug @sess %>
+<%= debug @status%>
 <div class="card ">
   <div class="card-header">
     <h1><%= t("listTask.el.titlePage") %></h1>
@@ -10,7 +11,7 @@
 
     <div class="card-body">
           <div class="form-group">
-              <%= form_with scope: :search do |f| %>
+              <%= form_with scope: :search, url: search_path do |f| %>
                   
                   <div class="row">
                     <div class="col-md-4"></div>
@@ -39,7 +40,7 @@
                   <div class="row">
                     <div class="col-md-4"></div>
                     <div class="col">
-                        <button type="submit" class="btn btn-primary col-md-12"  id="search_task">検索</button></br>
+                        <button type="submit" class="btn btn-primary col-md-12"   id="search_task">検索</button></br>
                     </div>
                     
                     <div class="col-md-4"></div>
