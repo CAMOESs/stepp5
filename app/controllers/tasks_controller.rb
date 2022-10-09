@@ -17,8 +17,6 @@ class TasksController < ApplicationController
         if ((@title != nil || @status != nil))
          
           if @title != '' && @status !=''
-            i=0
-            puts i
             if @status == "未着手" && @title != nil
               @tasks = Task.where("title LIKE ? AND status = 0",@title).page params[:page]
             elsif @status == "着手中" && @title != nil
@@ -28,12 +26,8 @@ class TasksController < ApplicationController
             end
             
           elsif (@status == '' && @title.is_a?(String))
-            i=1
-            puts i
             @tasks = Task.where("title LIKE ? ",'%'+@title+'%').page params[:page]
           elsif @title == '' && @status != nil
-            i=2
-            puts i
             if @status == "未着手" 
               @tasks = Task.where("status = ?",0).page params[:page]
             elsif @status == "着手中"
