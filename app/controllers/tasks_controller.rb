@@ -36,7 +36,7 @@ class TasksController < ApplicationController
           elsif (@status == '' && @title.is_a?(String))
             i=1
             puts i
-            @tasks = Task.where("title LIKE ? ",@title).page params[:page]
+            @tasks = Task.where("title LIKE ? ",'%'+@title+'%').page params[:page]
           elsif @title == '' && @status != nil
             i=2
             puts i
