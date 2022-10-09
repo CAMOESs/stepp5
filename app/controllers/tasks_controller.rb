@@ -12,10 +12,11 @@ class TasksController < ApplicationController
       else
         @sess = session[:search]
         n = 0 if session.delete(:search?)
-        @tasks = Task.all.page params[:page]
+        @tasks = Task.all.order(created_at: :desc).page params[:page]
         @title = session[:title]
+        @tasks = Task.where("title LIKE ? ",@title).page params[:page]
         @status = session[:status]
-        if ((@title != nil && @status != nil) || (@title == nil && @status != nil) || (@title != nil && @status == nil))
+        if ((@title != nil && @status != nil))
          
           if @title != '' && @status !=nil
             i=0
@@ -28,7 +29,7 @@ class TasksController < ApplicationController
               @tasks = Task.where("title LIKE ? AND status = 2",@title).page params[:page]
             end
             
-          elsif @title != '' && @status == '' 
+          elsif (@status == '' && @title != '')
             i=1
             puts i
             @tasks = Task.where("title LIKE ? ",@title).page params[:page]
@@ -42,11 +43,9 @@ class TasksController < ApplicationController
             elsif @status == "完了"
               @tasks = Task.where("status = ?",2).page params[:page]
             end
+          
           end
-          
-        else
-          @tasks = Task.all.order(created_at: :desc).page params[:page]
-          
+        
         end
         session.destroy
       #  @tasks = Task.all.order(created_at: :desc).page params[:page]
