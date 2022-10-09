@@ -21,19 +21,19 @@
             </div>
     <% end %>
     
-  <div class="card-header">   
-  <h1><%= t("newTask.el.titlePage") %></h1>
-  </div>
+    <div class="card-header">   
+        <h1><%= t("newTask.el.titlePage") %></h1>
+    </div>
   
   <div class="card-body ">
         <div class="form-group ">
-            <%= form_with @task do |f| %>
+            <%= form_for @task do |f| %>
                 <%= f.label :title , class: "control-label"%>
-                <div class="">
+                <div>
                     <%= f.text_field :title, class: "form-control " %>
                 </div>
                 <%= f.label :content, class: " control-label"%>
-                <div class="">
+                <div>
                     <%= f.text_field :content, class: "form-control " %>
                 </div>
                 <%= f.label :終了期限, class: " control-label"%>
@@ -48,8 +48,6 @@
                 <div class="form-control row" >
                 <%= f.select :status,["未着手", "着手中","完了"], include_blank: true%>
                 </div>
-              
-                
                 </br>
                 <div>
                     <button type="submit" class="btn btn-success" id="create-task"><%= t("activerecord.attributes.task.create") %> </button></br>
