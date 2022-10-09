@@ -17,22 +17,22 @@ class TasksController < ApplicationController
         @status = session[:status]
         if ((@title != nil && @status != nil) || (@title == nil && @status != nil) || (@title != nil && @status == nil))
          
-          if @title != nil && @status !=nil
+          if @title != '' && @status !=nil
             i=0
             puts i
-            if @status == "未着手" 
-              @tasks = Task.where("title LIKE ? AND status = ?",@title,0).page params[:page]
-            elsif @status == "着手中"
-              @tasks = Task.where("title LIKE ? AND status = ?",@title,1).page params[:page]
-            elsif @status == "完了"
-              @tasks = Task.where("title LIKE ? AND status = ?",@title,2).page params[:page]
+            if @status == "未着手" && @title != nil
+              @tasks = Task.where("title LIKE ? AND status = 0",@title).page params[:page]
+            elsif @status == "着手中" && @title != nil
+              @tasks = Task.where("title LIKE ? AND status = 1",@title).page params[:page]
+            elsif @status == "完了" && @title != nil
+              @tasks = Task.where("title LIKE ? AND status = 2",@title).page params[:page]
             end
             
-          elsif @status ==nil && @title != nil
+          elsif @title != '' && @status == '' 
             i=1
             puts i
             @tasks = Task.where("title LIKE ? ",@title).page params[:page]
-          elsif @status != nil
+          elsif @title == '' && @status != nil
             i=2
             puts i
             if @status == "未着手" 
