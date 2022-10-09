@@ -6,16 +6,13 @@ class TasksController < ApplicationController
       if params[:sort_deadline_on]
         @tasks = Task.all.order(deadline_on: :asc).page params[:page]
       elsif params[:sort_priority] && (conf != 1)
-          @tasks = Task.all.order(priority: :asc).page params[:page]
+          @tasks = Task.all.order(priority: :asc).order(created_at: :desc).page params[:page]
       elsif
         @sess = session[:search]
         @tasks = Task.all.order(created_at: :desc).page params[:page]
         @title = session[:title]
         @status = session[:status]
-        @v = @status == '' && @title !=''
-        @b = ""!=nil
-        @a = @title != '' && @status !=nil
-        puts @b
+        
         if ((@title != nil || @status != nil))
          
           if @title != '' && @status !=''
