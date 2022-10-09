@@ -9,7 +9,7 @@ class TasksController < ApplicationController
         if (conf != 1)
           @tasks = Task.all.order(priority: :asc).page params[:page]
         elsif (conf == 0)
-          @tasks = Task.all.order(priority: :asc).order(created_at: :desc).page params[:page]
+          @tasks = Task.all.order(created_at: :desc).page params[:page]
         end
       elsif
         @sess = session[:search]
