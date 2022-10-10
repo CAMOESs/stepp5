@@ -1,0 +1,25 @@
+<h1>アカウント詳細ページ</h1>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <th scope="col">名前 : </th>
+      <td scope="col"><%= @user.name %></td>
+      <th></th>
+    </tr>
+  
+    <tr>
+      <th>メールアドレス : </th>
+      <td><%= @user.email %></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td colspan="2" class="col-6"><a href="<%= edit_user_path %>" id="edit-user" class="btn btn-success edit-user">編集</a>
+         <a href="<%= destroy_user_path(@user.id) %>" data-confirm="本当に削除してもよろしいですか？" data-method="delete" id="destroy-user" class="btn btn-danger destroy-user">削除</a></td>
+      
+    </tr>
+   
+  </tbody>
+  
+</table>

@@ -1,0 +1,69 @@
+<%content_for(:title,"アカウント登録ページ") %>
+<% if @user.errors.any? %> 
+
+    <div class="alert alert-danger ">
+        <ul>
+            <%  @user.errors.full_messages.each do |message| %>
+                <%if message.include?("name") %>
+                    <% message = "名前を入力してください" %>
+                <% end %>
+                <%if message.include?("Nameはすでに存在します") %>
+                    <% message%>
+                <% end %>
+                <%if message.include?("email")  %>
+                    <% message = "メールアドレスを入力してください"%>
+                <% end %>
+                <%if message.include?("Email")  %>
+                    <% message = "メールアドレスはすでに使用されています"%>
+                <% end %>
+                <%if message.include?("long") &&  @user.password_digest.present? %>
+                    <%message = "パスワードは6文字以上で入力してください"%>
+                <% end %>
+                <%if message.include?("digestを入力してください")  %>
+                    <%message = "パスワードを入力してください"%>
+                <% end %>
+                
+                <li><%= message%></li>
+            <%end%>
+        </ul>
+    </div>
+
+<% end%>
+<h1>アカウント登録ページ</h1>
+<div class="row ">
+
+    <div class="col-md-8 panel-body">
+        <div class="form-group">
+            <%= form_for @user, html: {class: 'form-horizontal'} do |f| %>
+
+                <%= f.label :name,"名前" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.text_field :name, class: "form-control " %>
+                </div>
+
+                <%= f.label :email,"メールアドレス" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.email_field :email, class: "form-control " %>
+                </div>
+
+                <%= f.label :password_digest,"パスワード" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.password_field :password_digest, class: "form-control " %>
+                </div>
+
+                <%= f.label :password_confirmation, "パスワード（確認) " , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.password_field :password_confirmation, class: "form-control " %>
+                </div>
+                </br>
+                <div class="form-group col-md-8  align-items-center">
+                    <button type="submit" class="btn btn-primary create-user" id="create-user">登録する</button>
+                </div>
+            
+            <% end %>
+        </div>
+    </div>
+    <div class="col-4 form-group ">
+    </div>
+</div>
+

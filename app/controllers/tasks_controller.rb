@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
     #require 'date_time_attribute'
     before_action :set_task, only: %i[ show edit update destroy ]
-  
+    #before_action :onlySingnOut, only: [:new, :create]
+
     def index
       if params[:sort_deadline_on]
         @tasks = Task.deadline_on.page params[:page]

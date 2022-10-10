@@ -1,0 +1,53 @@
+<% if @user.errors.any? %> 
+
+    <div class="alert alert-danger ">
+        <ul>
+            <%  @user.errors.full_messages.each do |message| %>
+                <li><%= message%></li>
+            <%end%>
+        </ul>
+    </div>
+
+<% end%>
+
+<h1>アカウント編集ページ</h1>
+
+<div class="row ">
+    <div class="col-md-8 panel-body">
+        <div class="form-group">
+            <%= form_for @user,url: edit_user_path, html: {class: 'form-horizontal'} do |f| %>
+
+                <%= f.label :name,"名前" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.text_field :name, class: "form-control " %>
+                </div>
+
+                <%= f.label :email,"メールアドレス" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.email_field :email, class: "form-control " %>
+                </div>
+
+                <%= f.label :password_digest,"パスワード" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.password_field :password_digest, class: "form-control " %>
+                </div>
+
+                <%= f.label :password_confirmation, "パスワード（確認) " , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.password_field :password_confirmation, class: "form-control " %>
+                </div>
+                </br>
+                <div class="form-group col-md-8  align-items-center">
+                    <button type="submit" class="btn btn-primary update-user" id="update-user">更新する</button>
+                </div>
+                <div class="form-group col-md-8  align-items-center">
+                    <a href="<%= show_path %>" id="back" class="btn btn-link back">戻る</a>
+                </div>
+            
+            <% end %>
+        </div>
+    </div>
+    <div class="col-4 form-group ">
+    </div>
+</div>
+
