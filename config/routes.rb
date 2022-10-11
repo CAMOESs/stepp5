@@ -8,12 +8,12 @@ Rails.application.routes.draw do
   patch '/users/edit', to: 'users#update'
 
   #users
-  resources :users, only: [:create]
+  #resources :users, only: [:create]
   get '/users/new', to: 'users#new', as: :new_user
   get '/users/show', to: 'users#show', as: :user
   get '/users/', to: 'tasks#index'
   get '/users/edit/', to: 'users#edit', as: :edit_user
-  #get '/users', to: 'users#create', as: :new_user
+  post '/users', to: 'users#create'
   delete '/users/destroy', to: 'users#destroy', as: :destroy_user
 
   
