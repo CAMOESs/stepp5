@@ -4,25 +4,7 @@
     <div class="alert alert-danger ">
         <ul>
             <%  @user.errors.full_messages.each do |message| %>
-                <%if message.include?("name") %>
-                    <% message = "名前を入力してください" %>
-                <% end %>
-                <%if message.include?("Nameはすでに存在します") %>
-                    <% message%>
-                <% end %>
-                <%if message.include?("email")  %>
-                    <% message = "メールアドレスを入力してください"%>
-                <% end %>
-                <%if message.include?("Email")  %>
-                    <% message = "メールアドレスはすでに使用されています"%>
-                <% end %>
-                <%if message.include?("long") &&  @user.password_digest.present? %>
-                    <%message = "パスワードは6文字以上で入力してください"%>
-                <% end %>
-                <%if message.include?("digestを入力してください")  %>
-                    <%message = "パスワードを入力してください"%>
-                <% end %>
-                
+            
                 <li><%= message%></li>
             <%end%>
         </ul>

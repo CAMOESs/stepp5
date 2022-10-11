@@ -14,9 +14,10 @@ ja:
     models:
       user: ユーザー
     attributes:
-      task:
+      user:
         name: タイトル
         email: Eメール
+        password_digest: パスワードダイジェスト
         password: パスワード
 
   global:
