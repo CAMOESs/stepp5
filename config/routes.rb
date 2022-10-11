@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   delete  "/tasks/:id", to:"tasks#destroy", as: :destroy
   resources :tasks
   post 'search',to:"tasks#search", as: :search
-  patch '/users/edit', to: 'users#update'
+  patch '/users/:id/edit', to: 'users#update'
 
   #users
   resources :users, only: [:new, :create,:edit]

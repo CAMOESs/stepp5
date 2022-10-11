@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         @user = currentUser
         user_params = params.require(:user).permit(:name, :email, :password_digest)
         if @user.update(user_params)
-            redirect_to show_path, success: "アカウントを更新しました"
+            redirect_to user_path, success: "アカウントを更新しました"
         else
             render :edit
         end
