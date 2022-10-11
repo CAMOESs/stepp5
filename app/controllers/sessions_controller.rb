@@ -12,15 +12,15 @@ class SessionsController < ApplicationController
         @user = User.where(email: user_params[:email]).first
         if @user
             session[:auth] = {id: @user.id}
-            redirect_to '/', success:"connecté"
+            redirect_to tasks_path, success:"ログインしました"
         else
-            redirect_to new_session_path, danger:"Id inconnu"
+            redirect_to new_session_path, danger:"メールアドレスまたはパスワードに誤りがあります"
         end
     end
 
     def destroy
         session.destroy
-        redirect_to new_session_path, success: "déconnecté"
+        redirect_to new_session_path, success: "ログアウトしました"
     end
     
 end

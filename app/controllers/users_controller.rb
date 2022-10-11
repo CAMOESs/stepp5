@@ -14,7 +14,7 @@ class UsersController < ApplicationController
         if @user.valid?
             @user.save
             session[:auth] = {id: @user.id}
-            redirect_to tasks_path, success: 'compte créer avec succes'
+            redirect_to tasks_path, success: 'アカウントを登録しました'
         else
             render 'new'
         end
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         @user = currentUser
         user_params = params.require(:user).permit(:name, :email, :password_digest)
         if @user.update(user_params)
-            redirect_to show_path, success: "modification éffectuée"
+            redirect_to show_path, success: "アカウントを更新しました"
         else
             render :edit
         end

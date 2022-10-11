@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
     def onlySingnIn
         if !userSingnIn
-            redirect_to new_user_path, danger: "pas le droit"
+            redirect_to new_session_path, danger: "ログイン し て"
         end 
     end
 
@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
         !currentUser.nil?
     end
     def onlySingnOut
-        redirect_to show_path if userSingnIn
+        redirect_to tasks_path, danger: " ログアウト し て " if userSingnIn
     end
 end
