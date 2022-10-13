@@ -5,18 +5,18 @@ class UsersController < ApplicationController
 
     def new
         @user = User.new
+        
     end
 
     def create
         user_params = params.require(:user).permit(:name,:email,:password_digest)
         @user = User.new(user_params)
-
         if @user.valid?
             @user.save
             session[:auth] = {id: @user.id}
-            redirect_to tasks_path, success: 'アカウントを登録しました'
+            redirect_to tasks_path, success: 'アカウントを登録しました', status: 302
         else
-            render 'new'
+            render 'new', status: 404
         end
         
     end
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     def destroy
         @user = User.find(session[:auth]['id'])
         @user.destroy
-        redirect_to new_session_path, success: "compte supprimé"
+        redirect_to new_session_path, success: "compte supprimé", head: no_content
     end
 
 end

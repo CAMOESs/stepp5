@@ -15,10 +15,10 @@ ja:
       user: ユーザー
     attributes:
       user:
-        name: タイトル
-        email: Eメール
-        password_digest: パスワードダイジェスト
-        password: パスワード
+        name: 名前
+        #email: Eメール
+        #password_digest: パスワードダイジェスト
+        #password: パスワード
 
   global:
     menu:

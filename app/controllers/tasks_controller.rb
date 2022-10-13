@@ -95,7 +95,7 @@ class TasksController < ApplicationController
     end
   
     def task_params
-      params.require(:task).permit(:title, :content, :deadline_on,:priority, :status)
+      params.require(:task).permit(:title, :content, :deadline_on,:priority, :status,:user_id)
     end
 
     def relative_time_in_time_zone(time, zone)

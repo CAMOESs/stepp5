@@ -1,0 +1,68 @@
+<h1>ユーザ詳細ページ</h1>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <th scope="col">名前 : </th>
+      <td scope="col"><%= @user.name %></td>
+      <th></th>
+    </tr>
+  
+    <tr>
+      <th>メールアドレス : </th>
+      <td><%= @user.email %></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <th>管理者権限 : </th>
+      <td>
+        <% if @user.admin %>
+            あり
+        <% else %>
+            なし
+        <%end%>
+      </td>
+      <td></td>
+    </tr>
+    </tbody>
+  
+    </table>
+</br></br></br></br>
+    <div class="card-body">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col"><%= t("listTask.el.title") %></th>
+      <th scope="col"><%= t("listTask.el.Content") %></th>
+      <th scope="col"> <%= t("listTask.el.Created_at") %> </th>
+      <th scope="col">終了期限でソートする</th>
+      <th scope="col">優先度</th>
+      <th scope="col" >ステータス</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= task.title %></td>
+          <td><%= task.content %></td>
+          <td class = "XPath"><%= task.created_at.in_time_zone('Asia/Tokyo').strftime("%Y-%m-%d ")%></td>
+          <td><%= task.deadline_on %></td>
+          <td><%= task.priority %></td>
+          <td><%= task.status %></td>
+          <td> <a class="btn btn-primary show-task"  href="<%= task_path(task.id) %>"><%= t("listTask.el.show") %></a></td>
+          <td> <a class="btn btn-success edit-task"  href="<%= edit_task_path(task.id) %>"><%= t("listTask.el.edit")%></a></td>
+          <td> <a class="btn btn-danger destroy-task"  href="<%= task_path(task.id) %>" data-confirm= <%= t("listTask.el.confirm") %> data-method="delete"><%= t("listTask.el.destroy")%></a></td>
+        </tr>
+      <% end %>
+      
+    </tbody>
+    
+</table>
+<tr>
+      <a href="<%= admin_users_path %>" id="back" class="btn btn-link back">戻る</a>
+    </tr>
+    <%= paginate @tasks %>
+
+ 

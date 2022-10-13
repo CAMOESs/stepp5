@@ -21,7 +21,7 @@
               
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                    <a class="nav-link" href="<%= new_task_path %>" id="new-task"><%= t("global.menu.link") %><span class="sr-only"></span></a>
+                    <a class="nav-link new-task" href="<%= new_task_path %>" id="new-task"><%= t("global.menu.link") %><span class="sr-only"></span></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link my-account" href="<%= user_path %>" id="my-account">アカウント</a>
@@ -29,7 +29,17 @@
                   <li class="nav-item">
                     <a class="nav-link sign-out" href="<%= destroy_session_path %>" id="sign-out">ログアウト</a>
                   </li>
+                  <% if userSingnIn && currentUser.admin === true%>
+                    <li class="nav-item active">
+                      <a class="nav-link users-index" href="<%= admin_users_path %>" id="users-index">ユーザ一覧<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link my-account add-user" href="<%= new_admin_user_path %>" id="add-user">ユーザを追加する</a>
+                    </li>
+                  <% end %>
                 </ul>
+                	
+                
 
               <% else %>
                 <form class="form-inline mt-2 mt-md-0 nav-item navbar-nav mr-auto offset-md-12">

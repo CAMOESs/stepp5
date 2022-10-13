@@ -13,5 +13,7 @@ class Task < ApplicationRecord
     scope :status, ->(status) { where("status = ?",status)}
     scope :deadline_on, -> { all.order(deadline_on: :asc)}
     scope :priority, -> { all.order(priority: :asc)}
+
+    belongs_to :user
     
 end

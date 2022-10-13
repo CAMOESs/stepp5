@@ -17,17 +17,17 @@
         <div class="form-group">
             <%= form_for @user, html: {class: 'form-horizontal'} do |f| %>
 
-                <%= f.label :"名前" , class: "col-md-4 control-label"%>
+                <%= f.label "名前" , class: "col-md-4 control-label"%>
                 <div class="col-md-8">
                     <%= f.text_field :name, class: "form-control " %>
                 </div>
 
-                <%= f.label :"メールアドレス" , class: "col-md-4 control-label"%>
+                <%= f.label "メールアドレス" , class: "col-md-4 control-label"%>
                 <div class="col-md-8">
                     <%= f.email_field :email, class: "form-control " %>
                 </div>
 
-                <%= f.label :"パスワード" , class: "col-md-4 control-label"%>
+                <%= f.label "パスワード" , class: "col-md-4 control-label"%>
                 <div class="col-md-8">
                     <%= f.password_field :password_digest, class: "form-control " %>
                 </div>
@@ -39,6 +39,7 @@
                 </br>
                 <div class="form-group col-md-8  align-items-center">
                     <button type="submit" id="create-user" class="btn btn-primary ">登録する</button>
+
                 </div>
             
             <% end %>

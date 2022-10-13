@@ -1,0 +1,73 @@
+<% if @user.errors.any? %> 
+
+    <div class="alert alert-danger ">
+        <ul>
+            <%  @user.errors.full_messages.each do |message| %>
+                <% if message.include?("名前")%>
+                    <% message = "名前を入力してください" %>
+                <% end %>
+                <% if message.include?("Passwordを入力してください")%>
+                    <% message = "パスワードを入力してください" %>
+                <% end %>
+                <% if message.include?("Emailは不正な値です")%>
+                    <% message = "メールアドレスを入力してください" %>
+                <% end %>
+                <% if message.include?("Password digestは6文字以上で入力してください")%>
+                    <% message = "パスワードは6文字以上で入力してください" %>
+                <% end %>
+                <% if message.include?("Emailはすでに存在します")%>
+                    <% message = "メールアドレスはすでに使われています" %>
+                <% end %>
+
+                <% if message.include?("Password confirmationとPasswordの入力が一致しません")%>
+                    <% message = "パスワード（確認）とパスワードの入力が一致しません" %>
+                <% end %>
+                <li><%= message%></li>
+            <%end%>
+        </ul>
+    </div>
+
+<% end%>
+<h1>アカウント登録ページ</h1>
+<div class="row ">
+    <div class="col-md-8 panel-body">
+        <div class="form-group">
+            <%= form_for @user, url: admin_users_path, html: {class: 'form-horizontal'} do |f| %>
+
+                <%= f.label :"名前" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.text_field :name, class: "form-control " %>
+                </div>
+
+                <%= f.label "メールアドレス" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.email_field :email, class: "form-control " %>
+                </div>
+
+                <%= f.label "パスワード" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.password_field :password_digest, class: "form-control " %>
+                </div>
+
+                <%= f.label "パスワード（確認)" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                    <%= f.password_field :password_confirmation, class: "form-control " %>
+                </div>
+                <%= f.label "管理者権限" , class: "col-md-4 control-label"%>
+                <div class="col-md-8">
+                <%= f.check_box :admin %>
+                </div>
+                </br>
+                <div class="form-group col-md-8  align-items-center">
+                    <button type="submit" id="create-user" class="btn btn-primary ">登録する</button>
+                    <a class="btn btn-link back" href="<%= admin_users_path %>" id="back">戻る</td>
+
+                </div>
+            
+            <% end %>
+        </div>
+    </div>
+    <div class="col-4 form-group ">
+    </div>
+</div>
+

@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         @user = User.where(email: user_params[:email]).first
         if @user
             session[:auth] = {id: @user.id}
-            redirect_to tasks_path, success:"ログインしました"
+            redirect_to tasks_path, success:"ログインしました", status: 302
         else
             redirect_to new_session_path, danger:"メールアドレスまたはパスワードに誤りがあります"
         end

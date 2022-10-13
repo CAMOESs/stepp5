@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
         !currentUser.nil?
     end
     def onlySingnOut
-        redirect_to tasks_path, danger: " ログアウトして " if userSingnIn
+       redirect_to tasks_path, danger: " ログアウトして " if userSingnIn && currentUser.admin != true
     end
+    
 end
