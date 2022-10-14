@@ -2,7 +2,8 @@ module Admin
 
     class UsersController < ApplicationController
 
-        #before_action :holla, only: :destroy
+        before_action :holla, only: [:destroy]
+        before_action :priv, only: [:update]
 
         def index
             @users = User.all.page params[:page]
@@ -20,7 +21,7 @@ module Admin
             else
                 params[:user][:admin] = true
             end
-            user_params = params.require(:user).permit(:name,:email,:password_digest,:password_digest_confirmation,:admin)
+            user_params = params.require(:user).permit(:name,:email,:password_digest,:admin)
             @user = User.new(user_params)
     
             if @user.save
@@ -37,7 +38,7 @@ module Admin
     
         def update
             @user = User.find(params[:id])
-            user_params = params.require(:user).permit(:name, :email, :password_digest,:password_digest_confirmation,:admin)
+            user_params = params.require(:user).permit(:name, :email, :password_digest,:admin)
             if @user.update(user_params)
                 redirect_to admin_users_path, success: "ユーザを更新しました"
             else
@@ -56,9 +57,17 @@ module Admin
             redirect_to admin_users_path, success: "ユーザを削除しました"
         end
         
-        #def holla
-        #    session[:h] = 1
-        #end
+        def holla
+            if User.all.where(admin: :true).count == 1
+                redirect_to admin_users_path, danger: "管理者が0人になるため削除できません"
+            end
+        end
+
+        def priv
+            if User.all.where(admin: :true).count == 1
+                redirect_to admin_users_path, danger: "管理者が0人になるため権限を変更できません"
+            end
+        end
 
     end
 

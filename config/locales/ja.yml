@@ -20,6 +20,7 @@ ja:
         #password_digest: パスワードダイジェスト
         #password: パスワード
 
+ 
   global:
     menu:
       home: "タスク一覧"
