@@ -67,7 +67,15 @@ class TasksController < ApplicationController
     end
   
     def update
+      
       if @task.update(task_params)
+        #session[:lab] = {label_ids: @task.label_ids}
+        puts params[:task][:label_ids]
+        params[:task][:label_ids].each do |i|
+          #if i === task
+          @task.labels << Label.find(i)
+        end
+        #session.delete(:lab)
         flash[:success]=t("message.flash.success.type2")
         redirect_to tasks_path
       else
@@ -95,7 +103,7 @@ class TasksController < ApplicationController
     end
   
     def task_params
-      params.require(:task).permit(:title, :content, :deadline_on,:priority, :status,:user_id)
+      params.require(:task).permit(:title, :content, :deadline_on,:priority, :status,:user_id,:label_ids)
     end
 
     def relative_time_in_time_zone(time, zone)

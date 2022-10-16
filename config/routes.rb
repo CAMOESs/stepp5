@@ -27,5 +27,7 @@ Rails.application.routes.draw do
     resources :users
   end
 
+  #label
+  resources :labels
 
 end

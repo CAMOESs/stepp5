@@ -28,11 +28,11 @@
   <div class="card-body ">
         <div class="form-group ">
             <%= form_for @task do |f| %>
-                <%= f.label :title , class: "control-label"%>
+                <%= f.label "タイトル" , class: "control-label"%>
                 <div>
                     <%= f.text_field :title, class: "form-control " %>
                 </div>
-                <%= f.label :content, class: " control-label"%>
+                <%= f.label "内容" ,class: " control-label"%>
                 <div>
                     <%= f.text_field :content, class: "form-control " %>
                 </div>
@@ -48,6 +48,13 @@
                 <div class="form-control row" >
                 <%= f.select :status,["未着手", "着手中","完了"], include_blank: true%>
                 </div>
+                <div class="form-control col-md-8 " >
+                    <% Label.all.each do |label| %>
+                        <%= f.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id] %>
+                        <%= label.name %>
+                    <% end %>
+                </div>
+                  
                 </br>
                 <div>
                     <button type="submit" class="btn btn-success" id="create-task"><%= t("activerecord.attributes.task.create") %> </button></br>

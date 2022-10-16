@@ -44,6 +44,16 @@
     </tr>
 
     <tr>
+      <th>ラベル</th>
+      <td>
+      <% @task.labels.each do |label| %>
+        <%= label.name %>
+      <% end %>
+      </td>
+      <td></td>
+    </tr>
+
+    <tr>
       <td colspan="2" class="col-6"><a href="<%= edit_task_path(@task.id) %>" class="btn btn-success" id="edit-task"><%= t("listTask.el.edit") %></a>
       <a class="btn btn-link " href="<%= tasks_path %>" id="back"><%= t("activerecord.attributes.task.back") %></a></td>
       

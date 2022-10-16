@@ -15,5 +15,6 @@ class Task < ApplicationRecord
     scope :priority, -> { all.order(priority: :asc)}
 
     belongs_to :user
+    has_and_belongs_to_many  :labels
     
 end
