@@ -32,3 +32,6 @@ end
     sleep 2
     Task.create(title: "task#{i+40}", content:"content#{i+40}", deadline_on: Date.new, priority: 0, status: 2, user_id: 1)
 end
+10.times do |i|
+    Label.create(name: "label_#{i+1}")
+end
