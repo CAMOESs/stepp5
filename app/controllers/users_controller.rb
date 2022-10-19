@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
     skip_before_action :onlySingnIn, only: [:new, :create]
-    before_action :onlySingnOut, only: [:new, :create]
+    before_action :onlyAdmin
 
     def new
         @user = User.new
