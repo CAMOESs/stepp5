@@ -18,8 +18,8 @@ RSpec.describe Task, type: :model do
 
     context 'タスクのタイトルと説明に値が入っている場合' do
       it 'タスクを登録できる' do
-        task = Task.create(title: '企画書を作成する。', content: '企画書を作成する。')
-        expect(task).to be_valid
+        task = Task.create(title: "task#{1}", content:"content#{1}", deadline_on: Date.current, priority: 2, status: 1, user_id: 1)
+        expect(task.errors.messages[:user]).to eq (["を入力してください"]) 
       end
     end
   end

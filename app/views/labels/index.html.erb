@@ -13,7 +13,7 @@
     <tbody>
       <% @labels.each do |label| %>
         <tr>
-          <td><%= label.name %></td>
+          <td class = "XPl"><%= label.name %></td>
           <td><%= label.tasks.count %></td>
           <td> <a class="btn btn-primary edit-label"  href="<%= edit_label_path(label.id) %>">編集</a></td>
           <td> <a class="btn btn-danger  destroy-label"  href="<%= label_path(label.id) %>" data-confirm= "本当に削除してもよろしいですか？" data-method="delete">削除</a></td>

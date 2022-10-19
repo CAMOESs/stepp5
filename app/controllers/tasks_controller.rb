@@ -14,8 +14,9 @@ class TasksController < ApplicationController
         @tasks = Task.all.order(created_at: :desc).page params[:page]
         @title = session[:title]
         @status = session[:status]
+        @label = session[:label]
         
-        if ((@title != nil || @status != nil))
+        if ((@title != nil || @status != nil ||@label != nil))
          
           if @title != '' && @status !=''
             if @status == "未着手" && @title != nil
@@ -36,11 +37,13 @@ class TasksController < ApplicationController
             elsif @status == "完了"
               @tasks = Task.status(2).page params[:page]
             end
-          
+          elsif @label != ''
+            @tasks = Label.find(6).tasks.page params[:page]
           end
+          
         
         end
-        session.destroy
+        #session.destroy
       else
         @tasks = Task.all.order(created_at: :desc).page params[:page]
       end
@@ -52,6 +55,8 @@ class TasksController < ApplicationController
   
     def create
       @task = Task.new(task_params)
+      @user = User.first
+      @task.user = @user
       if @task.save
         flash[:success]= t("message.flash.success.type1") 
         redirect_to tasks_path
@@ -93,6 +98,7 @@ class TasksController < ApplicationController
       session[:search?] = 1
       session[:title] = params[:search][:title]
       session[:status] = params[:search][:status]
+      session[:label] = params[:search][:labels]
       redirect_to tasks_path
     end
 
