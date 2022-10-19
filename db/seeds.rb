@@ -9,4 +9,5 @@
 #    Task.create!(title: "task#{i+1}", content:"content#{i+1}")
 # end
 
-Task.create(title: "task#{1}", content:"content#{1}", deadline_on: Date.new, priority: 0, status: 2, user_id: 1)
+User.create(name: :hype, email: "hype@gmail.com", password_digest: 123456, admin: true)
+User.create(name: :tom, email: "tom@gmail.com", password_digest: 123456, admin: false)
