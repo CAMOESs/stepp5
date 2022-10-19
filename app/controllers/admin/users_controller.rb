@@ -29,7 +29,6 @@ module Admin
             else
                 render :new
             end
-            
         end
     
         def edit
