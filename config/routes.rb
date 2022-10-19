@@ -27,5 +27,10 @@ Rails.application.routes.draw do
     resources :users
   end
 
+  #label
+  resources :labels
 
+  match '/404', to: 'errors#not_found', via: :all
+  get '/500', to: 'errors#server_errors', via: :all
+  
 end

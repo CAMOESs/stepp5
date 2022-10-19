@@ -64,3 +64,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'kaminari'
 #tester de flash
 gem 'shoulda-matchers', '~> 3.1'
+gem 'rails-controller-testing'

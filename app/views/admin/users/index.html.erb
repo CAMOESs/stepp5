@@ -26,7 +26,7 @@
              なし
           <%end%>
           </td>
-          <td></td> 
+          <td><%=user.tasks.count %></td> 
           <td> <a class="btn btn-primary show-user"  href="<%= admin_user_path(user.id) %>">詳細</a></td>
           <td> <a class="btn btn-success edit-user"  href="<%= edit_admin_user_path(user.id) %>">編集</a></td>
           <td> <a class="btn btn-danger destroy-user"  href="<%= admin_user_path(user.id) %>" data-confirm= "本当に削除してもよろしいですか？" data-method="delete">削除</a></td>

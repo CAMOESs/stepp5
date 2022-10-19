@@ -14,7 +14,7 @@ class UsersController < ApplicationController
         if @user.valid?
             @user.save
             session[:auth] = {id: @user.id}
-            redirect_to tasks_path, success: 'アカウントを登録しました', status: 302
+            redirect_to tasks_path, success: 'アカウントを登録しました'
         else
             render 'new', status: 404
         end

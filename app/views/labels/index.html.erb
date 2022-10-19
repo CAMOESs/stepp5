@@ -1,0 +1,28 @@
+<div class="card-header">
+    <h1>ラベル一覧ページ</h1>
+</div>
+<div class="card-body">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">名前</th>
+      <th scope="col">タスク数</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+    <tbody>
+      <% @labels.each do |label| %>
+        <tr>
+          <td class = "XPl"><%= label.name %></td>
+          <td><%= label.tasks.count %></td>
+          <td> <a class="btn btn-primary edit-label"  href="<%= edit_label_path(label.id) %>">編集</a></td>
+          <td> <a class="btn btn-danger  destroy-label"  href="<%= label_path(label.id) %>" data-confirm= "本当に削除してもよろしいですか？" data-method="delete">削除</a></td>
+
+        </tr>
+      <% end %>
+    </tbody>
+    
+</table>
+    </div>
+    <%= paginate @labels %>
+</div>

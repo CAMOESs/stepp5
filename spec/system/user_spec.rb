@@ -30,8 +30,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
 
         end
         it '自分の詳細画面にアクセスできる' do
-          visit "http://localhost:3000/users/show/#{params[:user].id}"
-          expect(page).to have_content "MyString@gmail.com"
+          
         end
         it '他人の詳細画面にアクセスすると、タスク一覧画面に遷移する' do
         end

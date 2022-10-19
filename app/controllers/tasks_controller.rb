@@ -14,8 +14,9 @@ class TasksController < ApplicationController
         @tasks = Task.all.order(created_at: :desc).page params[:page]
         @title = session[:title]
         @status = session[:status]
+        @label = session[:label]
         
-        if ((@title != nil || @status != nil))
+        if ((@title != nil || @status != nil ||@label != nil))
          
           if @title != '' && @status !=''
             if @status == "未着手" && @title != nil
@@ -36,11 +37,13 @@ class TasksController < ApplicationController
             elsif @status == "完了"
               @tasks = Task.status(2).page params[:page]
             end
-          
+          elsif @label != ''
+            @tasks = Label.find(6).tasks.page params[:page]
           end
+          
         
         end
-        session.destroy
+        #session.destroy
       else
         @tasks = Task.all.order(created_at: :desc).page params[:page]
       end
@@ -52,6 +55,8 @@ class TasksController < ApplicationController
   
     def create
       @task = Task.new(task_params)
+      @user = User.first
+      @task.user = @user
       if @task.save
         flash[:success]= t("message.flash.success.type1") 
         redirect_to tasks_path
@@ -67,7 +72,15 @@ class TasksController < ApplicationController
     end
   
     def update
+      
       if @task.update(task_params)
+        #session[:lab] = {label_ids: @task.label_ids}
+        puts params[:task][:label_ids]
+        params[:task][:label_ids].each do |i|
+          #if i === task
+          @task.labels << Label.find(i)
+        end
+        #session.delete(:lab)
         flash[:success]=t("message.flash.success.type2")
         redirect_to tasks_path
       else
@@ -85,6 +98,7 @@ class TasksController < ApplicationController
       session[:search?] = 1
       session[:title] = params[:search][:title]
       session[:status] = params[:search][:status]
+      session[:label] = params[:search][:labels]
       redirect_to tasks_path
     end
 
@@ -95,7 +109,7 @@ class TasksController < ApplicationController
     end
   
     def task_params
-      params.require(:task).permit(:title, :content, :deadline_on,:priority, :status,:user_id)
+      params.require(:task).permit(:title, :content, :deadline_on,:priority, :status,:user_id,:label_ids)
     end
 
     def relative_time_in_time_zone(time, zone)

@@ -10,33 +10,36 @@
     <div class="card-body">
           <div class="form-group">
               <%= form_with scope: :search, url: search_path do |f| %>
-                  
-                  <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                      <div class="col-md-4"></div>
-                      <div class="form-control row">
+
+                <div class="row">
+                    <div class="offset-2 col-md-2">
                         <%= f.label :ステータス, class: " control-label "%>
+                        <div class= "form-control  row">
+                        
                         <%= f.select :status,["未着手", "着手中","完了"], include_blank: true%>
-                      </div>
-                    
+                        </div>
                     </div>
-                    <div class="col-md-4"></div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                      <%= f.label :タイトル, class: "control-label"%>
-                      <div>
-                          <%= f.text_field :title, class: "form-control " %>
-                      </div>
+
+                      <div class="col-md-4 mp-7">
+                          <%= f.label :タイトル, class: "control-label"%>
+                          <div>
+                              <%= f.text_field :title, class: "form-control " %>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4">
+                        <%= f.label :ラベル, class: " control-label "%>
+                        <div class= "form-control  row">
+                        
+                        <%= f.select :labels,Label.all.collect { |p| [ p.name, p.id ] }, include_blank: true%>
+                        </div>
                     </div>
-                    <div class="col-md-4"></div>
-                  </div>
+                </div>
+
                   </br>
 
                   <div class="row">
-                    <div class="col-md-4"></div>
+                    <div class="col-md-10"></div>
                     <div class="col">
                         <button type="submit" class="btn btn-primary col-md-12"   id="search_task">検索</button></br>
                     </div>

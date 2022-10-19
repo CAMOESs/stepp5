@@ -48,6 +48,13 @@
                 <div class="form-control row">
                 <%= f.select :status,["未着手", "着手中","完了"], include_blank: true%>
                 </div>
+                <div class="form-control col-md-8 " >
+                    <% Label.all.each do |label| %>
+                        <%= f.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id] %>
+                        <%= label.name %>
+                        
+                    <% end %>
+                </div>
                 </br>
                 <div>
                     <button type="submit" class="btn btn-primary"  id="update-task"><%= t("editTask.el.update") %></button></br>
