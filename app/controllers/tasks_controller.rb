@@ -2,6 +2,7 @@ class TasksController < ApplicationController
     #require 'date_time_attribute'
     before_action :set_task, only: %i[ show edit update destroy ]
     #before_action :onlySingnOut, only: [:new, :create]
+    
 
     def index
       if params[:sort_deadline_on]
@@ -58,6 +59,10 @@ class TasksController < ApplicationController
       @user = User.first
       @task.user = @user
       if @task.save
+        params[:task][:label_ids].each do |i|
+          #if i === task
+          @task.labels << Label.find(i)
+        end
         flash[:success]= t("message.flash.success.type1") 
         redirect_to tasks_path
       else
