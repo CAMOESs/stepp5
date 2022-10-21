@@ -31,7 +31,7 @@
                         <%= f.label :ラベル, class: " control-label "%>
                         <div class= "form-control  row">
                         
-                        <%= f.select :labels,Label.all.collect { |p| [ p.name, p.id ] }, include_blank: true%>
+                        <%= f.select :labels, User.find(currentUser.id).labels.collect { |p| [ p.name, p.id ] }, include_blank: true%>
                         </div>
                     </div>
                 </div>

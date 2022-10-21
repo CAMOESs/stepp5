@@ -1,6 +1,6 @@
 class LabelsController < ApplicationController
     def index
-        @labels = Label.all.page params[:page]
+        @labels = User.find(currentUser.id).labels.all.page params[:page]
     end
     def new
         @label = Label.new
@@ -8,6 +8,8 @@ class LabelsController < ApplicationController
     def create
         label_params = params.require(:label).permit(:name)
         @label = Label.new(label_params)
+        @user = User.find(currentUser.id)
+        @label.user = @user
         if @label.valid?
             @label.save
             redirect_to labels_path, success: "ラベルを登録しました"
