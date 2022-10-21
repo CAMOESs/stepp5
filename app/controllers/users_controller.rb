@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
 
     skip_before_action :onlySingnIn, only: [:new, :create]
-    #before_action :onlyAdmin
-
     def new
         @user = User.new
         
@@ -12,6 +10,7 @@ class UsersController < ApplicationController
         user_params = params.require(:user).permit(:name,:email,:password_digest)
         @user = User.new(user_params)
         if @user.valid?
+            @user.admin = false
             @user.save
             session[:auth] = {id: @user.id}
             redirect_to tasks_path, success: 'アカウントを登録しました'

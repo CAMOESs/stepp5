@@ -1,10 +1,9 @@
 class TasksController < ApplicationController
     #require 'date_time_attribute'
     before_action :set_task, only: %i[ show edit update destroy ]
-    #before_action :onlySingnOut, only: [:new, :create]
-    
 
     def index
+     
       if params[:sort_deadline_on]
         @tasks = Task.deadline_on.page params[:page]
       elsif params[:sort_priority] && (conf != 1)
@@ -56,8 +55,9 @@ class TasksController < ApplicationController
   
     def create
       @task = Task.new(task_params)
-      @user = User.first
+      @user = User.find(currentUser.id)
       @task.user = @user
+      
       if @task.save
         params[:task][:label_ids].each do |i|
           #if i === task

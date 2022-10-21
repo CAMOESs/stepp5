@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     
     has_many :tasks, dependent: :destroy
+    has_many :labels, dependent: :destroy
     attr_accessor :password_confirmation
     has_secure_password
     validates :password_digest, presence: true
