@@ -13,11 +13,10 @@ class TasksController < ApplicationController
         @sess = session[:search]
         @tasks = Task.all.order(created_at: :desc).page params[:page]
         @title = session[:title]
-        @status = session[:status]
+        @status = session[:status] 
         @label = session[:label]
-        
+        puts @label, "4"
         if ((@title != nil || @status != nil ||@label != nil))
-         
           if @title != '' && @status !=''
             if @status == "未着手" && @title != nil
               @tasks = Task.statuS(@title,0).page params[:page]
@@ -27,9 +26,9 @@ class TasksController < ApplicationController
               @tasks = Task.statuS(@title,2).page params[:page]
             end
             
-          elsif (@status == '' && @title.is_a?(String))
+          elsif (@status == '' && @title!='')
             @tasks = Task.title(@title).page params[:page]
-          elsif @title == '' && @status != nil
+          elsif @title == '' && @status != ''
             if @status == "未着手" 
               @tasks = Task.status(0).page params[:page]
             elsif @status == "着手中"
@@ -37,10 +36,12 @@ class TasksController < ApplicationController
             elsif @status == "完了"
               @tasks = Task.status(2).page params[:page]
             end
-          elsif @label != ''
-            @tasks = Label.find(6).tasks.page params[:page]
+          elsif (@title == '' && @status =='' && @label != nil)
+            @tasks = Label.find(@label).tasks.page params[:page]
           end
-          
+          session.delete('title')
+          session.delete('label')
+          session.delete('status')
         
         end
         #session.destroy

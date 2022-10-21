@@ -46,7 +46,7 @@
     <tr>
       <th>ラベル</th>
       <td>
-      <% User.find(currentUser.id).labels.each do |label| %>
+      <% Task.find(params[:id]).labels.each do |label| %>
         <%= label.name %>
       <% end %>
       </td>
